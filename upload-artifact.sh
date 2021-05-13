@@ -16,7 +16,7 @@ npm install
 echo ""
 echo "Creating lambda artifact..."
 echo ""
-zip ../helloworld-lambda.zip index.js
+zip ../helloworld-lambda.zip index.js package.json node_modules/
 
 # creates s3 bucket to upload lambda artifact
 echo ""

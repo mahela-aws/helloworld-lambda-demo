@@ -4,6 +4,7 @@
   "description": "Basic lambda function deployment using terraform",
   "main": "index.js",
   "dependencies": {
+    "aws-sdk": "^2.718.0",
     "axios": "^0.21.1"
   },
   "devDependencies": {},

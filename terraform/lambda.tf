@@ -10,41 +10,6 @@ provider "aws" {
   region = "us-east-1"
 }
 
-resource "aws_lambda_function" "helloworld_lambda" {
-  function_name = "HelloWorldExample"
-
-  # bucker name for the lambda artifact
-  s3_bucket = var.lambda_artifact_bucket
-  s3_key    = "v1.0.0/helloworld-lambda.zip"
-
-  handler = "index.handler"
-  runtime = "nodejs12.x"
-
-  role = aws_iam_role.lambda_role.arn
-}
-
-# IAM role required for the lambda execution
-resource "aws_iam_role" "lambda_role" {
-  name = "helloworld_lambda_role"
-
-  assume_role_policy = <<EOF
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Action": "sts:AssumeRole",
-      "Principal": {
-        "Service": "lambda.amazonaws.com"
-      },
-      "Effect": "Allow",
-      "Sid": ""
-    }
-  ]
-}
-EOF
-
-}
-
 # Creates sns topic
 resource "aws_sns_topic" "sns_topic" {
   name            = "sns-topic-lambda"
@@ -75,4 +40,51 @@ resource "aws_sns_topic" "sns_topic" {
   provisioner "local-exec" {
     command = "aws sns subscribe --topic-arn ${self.arn} --protocol email --notification-endpoint ${var.sns_subscription_email}"
   }
+}
+
+
+resource "aws_lambda_function" "helloworld_lambda" {
+  function_name = "HelloWorldExample"
+
+  # bucker name for the lambda artifact
+  s3_bucket = var.lambda_artifact_bucket
+  s3_key    = "v1.0.0/helloworld-lambda.zip"
+
+  handler = "index.handler"
+  runtime = "nodejs12.x"
+
+  role = aws_iam_role.lambda_role.arn
+
+  environment {
+    variables = {
+      SNS_TOPIC_ARN = aws_sns_topic.sns_topic.arn
+    }
+  }
+
+  depends_on = [
+    aws_sns_topic.sns_topic,
+  ]
+
+}
+
+# IAM role required for the lambda execution
+resource "aws_iam_role" "lambda_role" {
+  name = "helloworld_lambda_role"
+
+  assume_role_policy = <<EOF
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Action": "sts:AssumeRole",
+      "Principal": {
+        "Service": "lambda.amazonaws.com"
+      },
+      "Effect": "Allow",
+      "Sid": ""
+    }
+  ]
+}
+EOF
+
 }

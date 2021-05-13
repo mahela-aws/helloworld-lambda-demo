@@ -5,6 +5,13 @@ echo ""
 read -p "Enter a unique s3 bucket name [helloworld-lambda-example-32431]: " S3_BUCKET_NAME
 S3_BUCKET_NAME=${S3_BUCKET_NAME:-helloworld-lambda-example-32431}
 
+# installing packages
+echo ""
+echo "Installing packages required..."
+echo ""
+npm install
+
+
 # creates lambda artifact
 echo ""
 echo "Creating lambda artifact..."

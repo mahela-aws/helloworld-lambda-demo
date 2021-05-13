@@ -1,0 +1,23 @@
+{
+  "name": "helloworld-lambda-demo",
+  "version": "1.0.0",
+  "description": "Basic lambda function deployment using terraform",
+  "main": "index.js",
+  "dependencies": {
+    "axios": "^0.21.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mahela-aws/helloworld-lambda-demo.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mahela-aws/helloworld-lambda-demo/issues"
+  },
+  "homepage": "https://github.com/mahela-aws/helloworld-lambda-demo#readme"
+}

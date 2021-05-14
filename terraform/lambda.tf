@@ -90,43 +90,6 @@ EOF
 
 }
 
-resource "aws_iam_policy" "lambda_kms" {
-  name        = "lambda_kms"
-  path        = "/"
-  description = "IAM policy allow kms access"
-
-  policy = <<EOF
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Effect": "Allow",
-      "Action": [
-          "kms:CreateAlias",
-          "kms:CreateKey",
-          "kms:DeleteAlias",
-          "kms:Describe*",
-          "kms:GenerateRandom",
-          "kms:Get*",
-          "kms:List*",
-          "kms:TagResource",
-          "kms:UntagResource",
-          "iam:ListGroups",
-          "iam:ListRoles",
-          "iam:ListUsers"
-      ],
-      "Resource": "*"
-    }
-  ]
-}
-EOF
-}
-
-resource "aws_iam_role_policy_attachment" "lambda_kms_attach" {
-  role       = aws_iam_role.lambda_role.name
-  policy_arn = aws_iam_policy.lambda_kms.arn
-}
-
 resource "aws_iam_policy" "lambda_sns" {
   name        = "lambda_sns"
   path        = "/"

@@ -1,5 +1,6 @@
 # helloworld-lambda-demo
-Basic lambda function deployment using terraform
+Basic lambda function deployment using terraform. This lambda function queries the below endpoint and publishes the latest blocks to an sns topic.
+https://blockchain.info/blocks/1620819099272?format=json
 
 ## Prerequisites
 
@@ -45,7 +46,7 @@ All aws resources will be created in us-east-1 region
 ## Known Issue
 
 `Lambda was unable to decrypt the environment variables because KMS access was denied`
-This is a known issue as shown in below link. You get this error when you deploy the lambda function for first time and try to run it.
+This is a known issue as shown in below link. You get this error when you deploy the lambda function for the first time and try to run it.
 
 https://github.com/serverless/examples/issues/279
 

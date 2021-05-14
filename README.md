@@ -39,3 +39,20 @@ Follow below steps to deploy lambda function to aws
 
 #### Note
 All aws resources will be created in us-east-1 region
+
+
+## Known Issue
+
+`Lambda was unable to decrypt the environment variables because KMS access was denied`
+This is a known issue as shown in below link. You get this error when you deploy the lambda function for first time and try to run it.
+
+https://github.com/serverless/examples/issues/279
+
+#### Workaround
+
+You can just do a simple modification to the lambda as shown below and redeploy the lambda to get rid of this error.
+
+ - Modify lambda.tf file and change the timeout value to a different value
+   - `timeout = 80 --> timeout = 100`
+ - Redeploy the lambda using `terraform apply`
+ - This should fix the KMS access denied

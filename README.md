@@ -6,6 +6,7 @@ Basic lambda function deployment using terraform
 - AWS account with local credentials configure `~/.aws/credentials`
 - aws cli installed and configured on your local environment.
 - Terraform 0.14.7+ installed on your local workstation.
+- npm installation(node package manager) done on your local workstation
 
 ## Create and push lambda artifact to an s3 bucket
 
